@@ -4,11 +4,13 @@ import csv
 import math
 from typing import List, Tuple
 
+
 def index_range(page: int, page_size: int) -> Tuple[int, int]:
     """get index range"""
     start_idx = (page - 1) * page_size
     end_idx = page * page_size
     return (start_idx, end_idx)
+
 
 class Server:
     """Server class to paginate a database of popular baby names.
@@ -39,4 +41,5 @@ class Server:
         start_idx = start_idx if start_idx >= 0 else None
         dataset = self.dataset()
         end_idx = end_idx if end_idx < len(dataset) else None
-        return [] if start_idx is None or end_idx is None else dataset[start_idx:end_idx]
+        return [] if start_idx is None or end_idx is None \
+            else dataset[start_idx:end_idx]
