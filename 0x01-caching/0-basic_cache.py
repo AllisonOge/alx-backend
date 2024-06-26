@@ -8,9 +8,9 @@ class BasicCache(BaseCaching):
     """a basic cache system"""
     def put(self, key, item):
         """Add item to the cache without limit"""
-        if key is None and item is None:
+        if key is None or item is None:
             return
-        self.cache_data.update({f"{key}": item})
+        self.cache_data.update({key: item})
 
     def get(self, key):
         """Get an item from the cache"""
