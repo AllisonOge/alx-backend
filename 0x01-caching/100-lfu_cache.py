@@ -7,7 +7,7 @@ BaseCaching = __import__("base_caching").BaseCaching
 class LFUCache(BaseCaching):
     """a lfu cache"""
     def __init__(self):
-        super().__init__(self)
+        super().__init__()
         self.frequency = defaultdict(int)  # tracks the frequency of each item
 
     def put(self, key, item):
@@ -16,12 +16,12 @@ class LFUCache(BaseCaching):
             return
         if len(self.cache_data) >= BaseCaching.MAX_ITEMS \
                 and key not in self.cache_data:
-                    # fimd the least frequency used item
-                    lfui = min(self.frequency.values())
-                    lfuk = [k for k, v in self.frequency.items() if v == lfui][0]
-                    self.cache_data.pop(lfuk)
-                    self.frequency.pop(lfuk)
-                    print(f"DISCARD: {lfuk}")
+            # find the least frequency used item
+            lfui = min(self.frequency.values())
+            lfuk = [k for k, v in self.frequency.items() if v == lfui][0]
+            self.cache_data.pop(lfuk)
+            self.frequency.pop(lfuk)
+            print(f"DISCARD: {lfuk}")
         self.cache_data.update({key: item})
         self.frequency[key] += 1
 
