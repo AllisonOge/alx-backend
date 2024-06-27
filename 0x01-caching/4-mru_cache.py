@@ -15,15 +15,14 @@ class MRUCache(BaseCaching):
         """Add an item to the cache using MRU algo"""
         if key is None or item is None:
             return
-        if len(self.cache_data) > BaseCaching.MAX_ITEMS:
+        if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
             # pop the last item (most recently used item)
             o_k, _ = self.cache_data.popitem(last=True)
             print(f"DISCARD: {o_k}")
 
-        if key in self.cache_data:
-            # move the existing item to the end to mark it as recently used
-            self.cache_data.move_to_end(key)
         self.cache_data.update({key: item})
+        # move the existing item to the end to mark it as recently used
+        self.cache_data.move_to_end(key)
 
     def get(self, key):
         """Get an item from the cache"""
