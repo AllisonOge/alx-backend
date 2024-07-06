@@ -38,11 +38,11 @@ class Server:
     def get_hyper_index(self, index: int = None, page_size: int = 10) -> Dict:
         """get hypermedia pagination"""
         assert index is not None and 0 <= index < len(self.indexed_dataset())
-        
+
         next_idx = index
         data = []
         indexed_dataset = self.indexed_dataset()
-        
+
         for i in range(index, index + page_size):
             if i in indexed_dataset:
                 data.append(indexed_dataset[i])
