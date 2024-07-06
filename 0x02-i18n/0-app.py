@@ -2,14 +2,16 @@
 """
 simple flask app
 """
-from flask import Flask, render_template
+from flask import Flask, render_template, Response
 
 
 app = Flask(__name__)
 app.url_map.strict_slashes = False
 
+
 @app.route("/")
-def root():
+def root() -> Response:
+    """render index page"""
     return render_template("0-index.html")
 
 
